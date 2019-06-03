@@ -1,0 +1,12 @@
+{
+    "port": 3000,
+    "dbConf": {
+        "dialect": "mysql",
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "password",
+        "database": "test1"
+    },
+    "jwtSecret" : "secret"
+}
