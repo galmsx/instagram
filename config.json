@@ -8,5 +8,11 @@
         "password": "password",
         "database": "test1"
     },
-    "jwtSecret" : "secret"
+    "jwtSecret" : "secret",
+    "Google" : {
+
+    },
+    "Twitter" : {
+        
+    }
 }
