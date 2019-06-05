@@ -8,11 +8,11 @@
         "password": "password",
         "database": "test1"
     },
-    "jwtSecret" : "secret",
-    "Google" : {
-
+    "jwtSecret": "secret",
+    "Google": {
+        "redirect_uri": "http://localhost:3000/auth/google",
+        "client_id": "85351197455-ob24jdfkg934906ta7bumk3is5kmjsfc.apps.googleusercontent.com",
+        "client_secret" : "zznvBls6Kpsv3gpcrWwR3QHX"
     },
-    "Twitter" : {
-        
-    }
+    "Twitter": {}
 }
