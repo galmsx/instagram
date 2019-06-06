@@ -14,6 +14,10 @@ export class AppController {
   async getStatic(@Param('fileid') param, @Res() res ){
       res.sendFile(param,{root : "public"})
   }
+  @Get("photos/:fileid")
+  async getPhoto(@Param('fileid') param, @Res() res ){
+      res.sendFile(param,{root : "photos"})
+  }
   @Get('#/*')
   async getIndexToo(@Res() res){
     res.sendFile('index.html',{root : "public"})

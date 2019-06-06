@@ -51,15 +51,15 @@ export class AuthService {
         const { access_token } = res;
         var userInfo = await (await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`)).json();
 
-        const email :string = userInfo.email;
+        const email: string = userInfo.email;
         var user = await this.userRep.findOne({ where: { email } });
         if (!user) {
-            var login: string = email.substring(0,email.indexOf("@"));
-    
-            while(await this.isLoginExist(login)) login = login + 1;
-         
+            var login: string = email.substring(0, email.indexOf("@"));
+
+            while (await this.isLoginExist(login)) login = login + 1;
+
             var password = sha256(Math.round(0 - 0.5 + Math.random() * (999999 - 0 + 1)).toString());
-            user = await this.userRep.create({login,email,password});
+            user = await this.userRep.create({ login, email, password });
         }
         return this.getToken(user);
 

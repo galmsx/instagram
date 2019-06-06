@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, BelongsTo,PrimaryKey} from 'sequelize-typescript';
 import {Hash} from './hash.model';
 import {Post} from './post.model';
 
@@ -9,10 +9,12 @@ export class PostHash extends Model<PostHash> {
     @BelongsTo(()=>Hash,{onDelete : "CASCADE", onUpdate : "CASCADE"})
     hash : Hash;
 
+    @PrimaryKey
     @ForeignKey(()=>Post)
     @Column
     postId : number;
 
+    @PrimaryKey
     @ForeignKey(()=>Hash)
     @Column
     hashId : number;

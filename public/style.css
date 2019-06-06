@@ -97,3 +97,103 @@
   text-decoration: none;
   font-size: 2rem;
 }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color: white;
+  z-index: 1000;
+  border-bottom: 0.1rem solid #dbdbdb;
+}
+header nav{
+  height: 10vh;
+  width: 70vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header a{
+  font-size: 3rem;
+  text-decoration: none;
+  color: #231f20;
+}
+header .big-l{
+  font-size: 4rem;
+
+}
+header input{
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  background-color: #fafafa;
+  border: none;
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 0.5rem;
+}
+main{
+  width: 70vw;
+  margin: 13vh auto;
+  height: auto;
+  overflow: auto;
+}
+.creator-unactive{
+  cursor: pointer;
+  width: 40vw;
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 3rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #dbdbdb;
+  color: gray;
+  background-color: white;
+}
+.creator{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2rem;
+  background-color: white;
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 1rem;
+  margin: 0 auto;
+  width: 40vw;
+  height: 35vh;
+}
+.post-post{
+  width: 10rem;
+  height: 3rem;
+  font-size: 2.3rem;
+  color: white;
+  background-image: linear-gradient(-180deg, #34d058, #28a745 90%);
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+}
+.creator textarea{
+  resize: none;
+  padding: 1rem;
+  width: 40rem;
+  height : 10rem;
+}
+.eee-design{
+  font-size: 2rem;
+  position: absolute;
+  
+  color: red;
+  transform: rotate(-45deg);
+}
+.eee-design.first-d{
+  left: 2.5rem;
+  transform: rotate(-45deg);
+}
+.eee-design.sec-d{
+  right: 5rem;
+  transform: rotate(45deg);
+}

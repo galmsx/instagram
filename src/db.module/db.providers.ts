@@ -25,5 +25,17 @@ export const databaseProviders = [
     {
       provide : 'SUBSCRIBE_REPOSITORY',
       useValue : Subscribe
+    },
+    {
+      provide : 'POST_REPOSITORY',
+      useValue : Post
+    },
+    {
+      provide : 'POSTHASH_REPOSITORY',
+      useValue : PostHash
+    },
+    {
+      provide : 'HASH_REPOSITORY',
+      useValue : Hash
     }
   ];

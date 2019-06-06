@@ -1,6 +1,6 @@
 import { Controller, UsePipes, Post, Body, Get, Query, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ValidationPipe } from '../validation.pipe';
+import { ValidationPipe } from '../customThings/validation.pipe';
 import { IToken } from './auth.interfaces';
 import { loginDTO, regDTO } from './auth.dto';
 
