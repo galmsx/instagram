@@ -37,5 +37,9 @@ export const databaseProviders = [
     {
       provide : 'HASH_REPOSITORY',
       useValue : Hash
+    },
+    {
+      provide : 'LIKES_REPOSITORY',
+      useValue : Likes
     }
   ];

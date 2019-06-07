@@ -3,19 +3,26 @@ import React from "react";
 class PostCreator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: ""
+    };
     this.postPhoto = this.postPhoto.bind(this);
   }
   postPhoto(ev) {
     ev.preventDefault();
     var data = new FormData();
-    data.append("Photo",this.Photo.files[0]);
-    data.append("Caption",this.Caption.value);
+    data.append("Photo", this.Photo.files[0]);
+    data.append("Caption", this.Caption.value);
     fetch("/posts", {
-        headers: new Headers({ authorization: localStorage.getItem("token") }),
-        method: "POST",
-        body: data
+      headers: new Headers({ authorization: localStorage.getItem("token") }),
+      method: "POST",
+      body: data
+    })
+      .then(res => {
+        if (!res.ok) throw Error(res.statusText);
       })
+      .then(() => this.props.unactiviser())
+      .catch(e => this.setState({ error: e.message }));
   }
   render() {
     if (!this.props.isActive)
@@ -41,6 +48,7 @@ class PostCreator extends React.Component {
             ref={ref => (this.Photo = ref)}
           />
           <label htmlFor="descr">Caption:</label>
+          <div className="eee-design">{this.state.error}</div>
           <textarea
             id="descr"
             cols="30"

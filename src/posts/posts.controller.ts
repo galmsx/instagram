@@ -1,30 +1,35 @@
-import { Controller, Get, Post, UseGuards, UploadedFile, UseInterceptors, Body } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards, UploadedFile, UseInterceptors, Put,Body ,UsePipes,Delete, Param} from '@nestjs/common';
 import { AuthGuard } from '../customThings/auth.guard';
+import {ValidationPipe} from '../customThings/validation.pipe'
 import { Token, IToken } from '../customThings/token.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {PostsService} from './posts.service';
-import {IFile} from './post.interfaces';
+import {fileDTO,alterPostDTO} from './post.dto';
+
 
 @Controller('posts')
 export class PostsController {
     constructor(private readonly postServ : PostsService) { };
 
-    @Get()
-    @UseGuards(AuthGuard)
-    async testGet(@Token() token: IToken) {
-        console.log(token.login);
-        return "yeah"
-    }
-
     @Post()
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor("Photo"))
-    async createPost(@UploadedFile() file : IFile, @Body("Caption") caption: string, @Token() token: IToken) {
-        console.log(file);
-        console.log(caption);
-        console.log(token);
+    @UsePipes(ValidationPipe)
+    async createPost(@UploadedFile() file : fileDTO, @Body("Caption") caption: string, @Token() token: IToken) {
         await this.postServ.createPost(file,caption,token);
-        return "done";
+    }
+
+    @Delete(':id')
+    @UseGuards(AuthGuard)
+    async deletePost(@Param('id') id :number,@Token() token : IToken){
+        await this.postServ.deletePost(id,token);
+    }
+    
+    @Put(':id')
+    @UseGuards(AuthGuard)
+    @UsePipes(ValidationPipe)
+    async alterPost(@Param('id') id : number,@Token() token : IToken, @Body() body : alterPostDTO){
+        await this.postServ.alterPost(id,body.caption,token);
     }
 
 
