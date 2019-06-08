@@ -20,6 +20,7 @@ export class CommentService {
     }
     private readonly email;
     private sendNotifications(toUsers: User[], login: string, postId: number) {
+        if(!toUsers.length) return;
         this.email.send({
             text: `you have been mentioned by ${login}! \n under postId : ${postId}`,
             from: "cali4Gram",
@@ -54,7 +55,8 @@ export class CommentService {
     async getComments(id: number): Promise<IComments> {
         var comments = await this.commtRep.findAll({
             where: { postId: id },
-            include: [{ model: User }]
+            include: [{ model: User }],
+            order :[['createdAt', 'DESC']]
         });
         return {
             comments: comments.map(c => {

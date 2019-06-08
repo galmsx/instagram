@@ -19,7 +19,7 @@
       height: 55vh;
       background-color: white;
       margin: 0 auto;
-      margin-top: 10vh;
+      margin-top: 15vh;
       border-radius: 2rem;
   }
   .auth .register{
@@ -124,6 +124,13 @@ header .big-l{
   font-size: 4rem;
 
 }
+header .kek{
+  font-size: 4rem;
+}
+header .kek >i{
+  margin-left: 3rem;
+  cursor: pointer;
+}
 header input{
   height: 3rem;
   font-size: 2rem;
@@ -196,4 +203,119 @@ main{
 .eee-design.sec-d{
   right: 5rem;
   transform: rotate(45deg);
+}
+.user-link{
+text-decoration: none;
+}
+.user-info > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  border-bottom: 0.1rem dashed black;
+  background-color: white;
+  width: 55vw;
+  height: 3rem;
+  font-size: 1.5rem;
+  color : black;
+  padding-left: 5rem;
+
+}
+.user-info > div.big{
+  width: 60vw;
+  color : gray;
+  height: 8rem;
+  border-bottom: 0.1rem solid black;
+  font-size: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.post-wrapper{
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 2rem;
+  overflow: hidden;
+  margin: 5rem auto;
+  width: 60vw;
+  height: auto;
+  background-color: white;
+}
+.post-wrapper img{
+  margin-left: 10vw;
+  width: 40vw;
+  height : 30vw;
+}
+.likes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  height: 6vh;
+  font-size: 3rem;
+}
+.likes > div{
+  cursor: pointer;
+}
+.caption{
+  width: 60vw;
+  height: 6vh;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.caption textarea{
+  resize: none;
+  width: 40vw;
+  height: 6vh;
+  margin-right: 1rem;
+  margin-left: 5rem;
+}
+.caption i{
+  cursor: pointer;
+}
+.comment-creator{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  border-top: 0.2rem dashed gray;
+  width: 60vw;
+  height: 6vh;
+}
+.comment-creator textarea{
+  width : 30vw;
+  resize: none;
+  height: 4vh;
+}
+.comm-list{
+  max-height: 25vh;
+  overflow: auto;
+  padding-bottom: 1rem;
+}
+.comment-item{
+  margin-top : 1rem;
+}
+.comment-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.comment-text textarea{
+width: 40vw;
+height: 6vh;
+resize: none;
+}
+.sub-button{
+  border-radius: 1rem;
+  cursor: pointer;
+  width: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 3.5rem;
+  text-align: center;
+  height: 3.5rem;
+  background-color: #28a745;
+  font-size: 2rem;
+  color: white;
 }

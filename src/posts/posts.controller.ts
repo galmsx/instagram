@@ -5,7 +5,8 @@ import { Token, IToken } from '../customThings/token.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PostsService } from './posts.service';
 import { CommentService } from './comments.service';
-import { fileDTO, alterPostDTO,commnetDTO } from './post.dto';
+import { fileDTO, alterPostDTO, commnetDTO } from './post.dto';
+import { ILikes, IComments } from './post.interfaces';
 
 
 
@@ -45,30 +46,30 @@ export class PostsController {
         await this.postServ.unlikePost(id, token)
     }
     @Get(':id/likes')
-    async getLikes(@Param('id') id: number){
+    async getLikes(@Param('id') id: number): Promise<ILikes> {
         return this.postServ.getLikes(id);
     }
 
     @Post(':id/comments')
     @UseGuards(AuthGuard)
     @UsePipes(ValidationPipe)
-    async addComments(@Token() token : IToken, @Body() body : commnetDTO,@Param('id') id : number){
-        await this.commServ.createComment(id,token,body.text);
+    async addComments(@Token() token: IToken, @Body() body: commnetDTO, @Param('id') id: number) {
+        await this.commServ.createComment(id, token, body.text);
     }
     @Delete('/comments/:id')
     @UseGuards(AuthGuard)
-    async deleteComment(@Token() token : IToken, @Param('id') id : number){
-        await this.commServ.deleteComment(id,token);
+    async deleteComment(@Token() token: IToken, @Param('id') id: number) {
+        await this.commServ.deleteComment(id, token);
     }
 
     @Put('/comments/:id')
     @UseGuards(AuthGuard)
     @UsePipes(ValidationPipe)
-    async alterComment(@Token() token : IToken, @Body() body : commnetDTO,@Param('id') id : number){
-        await this.commServ.alterComment(id,token,body.text)
+    async alterComment(@Token() token: IToken, @Body() body: commnetDTO, @Param('id') id: number) {
+        await this.commServ.alterComment(id, token, body.text)
     }
     @Get(':id/comments')
-    async getComments(@Param('id') id : number){
+    async getComments(@Param('id') id: number): Promise<IComments> {
         return this.commServ.getComments(id);
     }
 

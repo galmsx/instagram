@@ -17,7 +17,8 @@ class Header extends React.Component {
     var signed = localStorage.getItem("token");
     if (signed) {
       signed = JSON.parse(base64url.decode(signed.split(".")[1]));
-     var login = signed.login;
+      var login = signed.login;
+      var id = signed.id;
     }
     return (
       <header>
@@ -37,15 +38,24 @@ class Header extends React.Component {
             />
           </form>
           {signed ? (
-            <Link to={`/${login}/`} className="big-l">
-              <strong>
-              <i class="far fa-user"></i>
-              </strong>
-            </Link>
+            <div className="kek">
+              <Link to={`/user/${id}`} className="big-l">
+                <strong>
+                  <i class="far fa-user" />
+                </strong>
+              </Link>
+              <i
+                class="fas fa-sign-out-alt"
+                onClick={_ => {
+                  localStorage.removeItem("token");
+                  location.replace('/');
+                }}
+              />
+            </div>
           ) : (
             <Link to={"/"}>
               <strong>
-              <i class="fas fa-sign-in-alt"></i>
+                <i class="fas fa-sign-in-alt" />
               </strong>
               <span> Sign In</span>
             </Link>

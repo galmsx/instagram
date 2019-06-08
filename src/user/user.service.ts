@@ -21,6 +21,7 @@ export class UserService {
         fromUsersId.push(token.id);
         var { rows, count } = await this.postRep.findAndCountAll({
             where: { userId: fromUsersId },
+            order :[['createdAt', 'DESC']],
             limit,
             offset
         });
@@ -34,7 +35,8 @@ export class UserService {
         var { rows, count } = await this.postRep.findAndCountAll({
             where: { userId: id },
             limit,
-            offset
+            offset,
+            order :[['createdAt', 'DESC']]
         });
         return {
             meta: { count, limit, offset },

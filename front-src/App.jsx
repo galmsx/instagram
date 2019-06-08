@@ -5,6 +5,7 @@ import Auth from "./components/pages/auth";
 import TokenGetter from "./tools/TokenGetter";
 import Header from './components/Header';
 import Feed from './components/pages/feed';
+import Userpage from './components/pages/userpage';
 
 function App() {
   var signed = localStorage.getItem("token");
@@ -13,6 +14,7 @@ function App() {
   <Header />
   <Switch>
   <Route path="/" component={Feed} exact/>
+  <Route path="/user/:id" component={Userpage} exact/>
   </Switch>
   </>
   );
@@ -22,6 +24,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/auth/:token" component={TokenGetter} />
+          <Route path="/user/:id" component={Userpage} exact/>
           <Route path="/" component={Auth} />
         </Switch>
       </>

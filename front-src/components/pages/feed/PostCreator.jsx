@@ -21,7 +21,9 @@ class PostCreator extends React.Component {
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
       })
-      .then(() => this.props.unactiviser())
+      .then(() => {
+        this.props.unactiviser();
+      })
       .catch(e => this.setState({ error: e.message }));
   }
   render() {
