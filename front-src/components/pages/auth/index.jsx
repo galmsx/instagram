@@ -112,7 +112,7 @@ class Auth extends React.Component {
               id="login"
               value={login}
               onChange={this.changeHandle}
-              pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
+              pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$"
               required
             />
           </div>

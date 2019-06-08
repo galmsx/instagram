@@ -41,5 +41,9 @@ export const databaseProviders = [
     {
       provide : 'LIKES_REPOSITORY',
       useValue : Likes
+    },
+    {
+      provide : 'COMMENT_REPOSITORY',
+      useValue : Comments
     }
   ];

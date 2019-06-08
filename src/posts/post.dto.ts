@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty ,IsInt,IsInstance} from 'class-validator';
+import { IsString, IsNotEmpty ,IsInt,IsInstance,MaxLength} from 'class-validator';
 import { Buffer } from 'buffer';
 
 export class fileDTO {
@@ -30,4 +30,13 @@ export class alterPostDTO{
     @IsNotEmpty()
     @IsString()
     readonly caption : string;
+}
+
+export class commnetDTO{
+    constructor(){}
+    
+    @MaxLength(200)
+    @IsNotEmpty()
+    @IsString()
+    readonly text : string;
 }
