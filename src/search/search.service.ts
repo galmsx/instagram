@@ -38,6 +38,7 @@ export class SearchService {
             where: {
                 [Op.or]: loginquery
             }
+            
         })
 
         var posts = await this.postRep.findAll({
