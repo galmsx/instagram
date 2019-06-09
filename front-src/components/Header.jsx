@@ -11,7 +11,10 @@ class Header extends React.Component {
   }
   searchHandle(ev) {
     ev.preventDefault();
-    console.log(this.state.searchValue);
+   var query = this.state.searchValue.replace(/\s+/g,',');
+   if(query[0]==',') query = query.slice(1);
+   if(query[query.length-1]==',') query = query.slice(0,-1);
+   location.replace(`/#/search/${query}`)
   }
   render() {
     var signed = localStorage.getItem("token");
