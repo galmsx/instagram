@@ -8,7 +8,7 @@ class Userpage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
     };
     this.id = this.props.match.params.id;
     this.limit = 20;

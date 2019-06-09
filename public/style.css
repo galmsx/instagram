@@ -13,6 +13,7 @@
   }
   h1{
     font-size: 3rem;
+    text-align: center;
   }
   .auth{
       width: 25vw;
@@ -232,7 +233,7 @@ text-decoration: none;
 }
 .post-wrapper{
   border: 0.1rem solid #dbdbdb;
-  border-radius: 2rem;
+  border-radius: 1rem;
   overflow: hidden;
   margin: 5rem auto;
   width: 60vw;
@@ -318,4 +319,8 @@ resize: none;
   background-color: #28a745;
   font-size: 2rem;
   color: white;
+}
+
+h1.ent{
+  margin-top: 3rem;
 }
