@@ -45,7 +45,8 @@ export class SearchService {
             include: [{
                 model: PostHash,
                 where: { hashId: hashesId }
-            }]
+            }],
+            order :[['createdAt', 'DESC']]
         })
 
         return {
