@@ -18,9 +18,9 @@ export class PostsService {
         @Inject("LIKES_REPOSITORY") private readonly likeRep: typeof Likes) { }
 
     private async  findHashes(caption: string, post: Post) {
-       await this.phRep.destroy({
-            where : {
-                postId : post.id
+        await this.phRep.destroy({
+            where: {
+                postId: post.id
             }
         });
         const hashes: string[] = caption.match(/#\w{2,12}/g) || [];

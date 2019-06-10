@@ -18,13 +18,16 @@ export class UserService {
             where: { id: token.id },
             include: [{ model: Subscribe, as: "subscribedTo", attributes: ["userId"] }]
         })).subscribedTo.map(e => e.userId);
+
         fromUsersId.push(token.id);
+
         var { rows, count } = await this.postRep.findAndCountAll({
             where: { userId: fromUsersId },
-            order :[['createdAt', 'DESC']],
+            order: [['createdAt', 'DESC']],
             limit,
             offset
         });
+
         return {
             meta: { count, limit, offset },
             posts: rows
@@ -36,7 +39,7 @@ export class UserService {
             where: { userId: id },
             limit,
             offset,
-            order :[['createdAt', 'DESC']]
+            order: [['createdAt', 'DESC']]
         });
         return {
             meta: { count, limit, offset },
