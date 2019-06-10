@@ -19,10 +19,14 @@ export class CommentService {
         });
     }
     private readonly email;
-    private sendNotifications(toUsers: User[], login: string, postId: number) {
-        if(!toUsers.length) return;
+    private async sendNotifications(text: string, fromUser: string, postId: number) {
+
+        var logins: string[] = text.match(/@[\w\.]{3,20}/g) || []
+        logins = logins.map(l => l.slice(1));
+        var toUsers = await this.userRep.findAll({ where: { login: logins } });
+        if (!toUsers.length) return;
         this.email.send({
-            text: `you have been mentioned by ${login}! \n under postId : ${postId}`,
+            text: `you have been mentioned by ${fromUser}! \n under postId : ${postId}`,
             from: "cali4Gram",
             to: toUsers.map(u => `user <${u.email}>`).join(' ,'),
             cc: "",
@@ -33,10 +37,8 @@ export class CommentService {
     async createComment(id: number, token: IToken, text: string) {
         var post = await this.postRep.findByPk(id);
         if (!post) throw new HttpException("post does't exist", HttpStatus.NOT_FOUND);
-        var logins: string[] = text.match(/@[\w\.]{3,20}/g) || []
-        logins = logins.map(l => l.slice(1));
-        var mentionedUsers = await this.userRep.findAll({ where: { login: logins } });
-        this.sendNotifications(mentionedUsers, token.login, post.id);
+
+        await this.sendNotifications(text, token.login, post.id);
         return this.commtRep.create({ userId: token.id, postId: id, text });
     }
     async deleteComment(id: number, token: IToken) {
@@ -50,13 +52,14 @@ export class CommentService {
         if (!comment) throw new HttpException("comment does't exist", HttpStatus.NOT_FOUND);
         if (comment.userId != token.id) throw new HttpException("you don't have permisions to do that", HttpStatus.NOT_IMPLEMENTED);
         comment.text = text;
+        await this.sendNotifications(text, token.login, comment.postId);
         return comment.save();
     }
     async getComments(id: number): Promise<IComments> {
         var comments = await this.commtRep.findAll({
             where: { postId: id },
             include: [{ model: User }],
-            order :[['createdAt', 'DESC']]
+            order: [['createdAt', 'DESC']]
         });
         return {
             comments: comments.map(c => {
