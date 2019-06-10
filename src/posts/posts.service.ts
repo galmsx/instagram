@@ -18,7 +18,11 @@ export class PostsService {
         @Inject("LIKES_REPOSITORY") private readonly likeRep: typeof Likes) { }
 
     private async  findHashes(caption: string, post: Post) {
-
+       await this.phRep.destroy({
+            where : {
+                postId : post.id
+            }
+        });
         const hashes: string[] = caption.match(/#\w{2,12}/g) || [];
         return Promise.all(hashes.map(async tag => {
             var [hash, isNew] = await this.hashRep.findOrCreate({ where: { tag } });
@@ -36,7 +40,7 @@ export class PostsService {
             photo: filename,
             userId: token.id
         });
-        
+
         return this.findHashes(caption, post);
     }
 
