@@ -19,6 +19,7 @@ export class CommentService {
         });
     }
     private readonly email;
+    
     private async sendNotifications(text: string, fromUser: string, postId: number) {
 
         var logins: string[] = text.match(/@[\w\.]{3,20}/g) || []

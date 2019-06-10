@@ -17,7 +17,14 @@ export class PostsService {
         @Inject("HASH_REPOSITORY") private readonly hashRep: typeof Hash,
         @Inject("LIKES_REPOSITORY") private readonly likeRep: typeof Likes) { }
 
+    private async  findHashes(caption: string, post: Post) {
 
+        const hashes: string[] = caption.match(/#\w{2,12}/g) || [];
+        return Promise.all(hashes.map(async tag => {
+            var [hash, isNew] = await this.hashRep.findOrCreate({ where: { tag } });
+            await this.phRep.create({ postId: post.id, hashId: hash.id })
+        }));
+    }
     async createPost(file: fileDTO, caption: string, token: IToken): Promise<any> {
         try { await validate(file) } catch (e) { throw new HttpException("bad file", HttpStatus.BAD_REQUEST) };
         if (!(/^image\//.test(file.mimetype))) throw new HttpException('only image files allowed', HttpStatus.BAD_REQUEST);
@@ -28,13 +35,9 @@ export class PostsService {
             caption,
             photo: filename,
             userId: token.id
-        })
-
-        const hashes: string[] = caption.match(/#\w{2,12}/g) || [];
-        return Promise.all(hashes.map(async tag => {
-            var [hash, isNew] = await this.hashRep.findOrCreate({ where: { tag } });
-            await this.phRep.create({ postId: post.id, hashId: hash.id })
-        }));
+        });
+        
+        return this.findHashes(caption, post);
     }
 
     async deletePost(id: number, token: IToken) {
@@ -50,7 +53,8 @@ export class PostsService {
         if (!post) throw new HttpException("post does't exist", HttpStatus.NOT_FOUND);
         if (post.userId != token.id) throw new HttpException("you don't hav permision to do that", HttpStatus.FORBIDDEN);
         post.caption = caption;
-        return post.save();
+        await post.save();
+        return this.findHashes(caption, post);
     }
     async likePost(id: number, token: IToken) {
         var post = await this.postRep.findByPk(id);
