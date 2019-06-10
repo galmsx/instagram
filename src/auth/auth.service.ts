@@ -4,6 +4,7 @@ import { IToken } from './auth.interfaces';
 import { loginDTO, regDTO } from './auth.dto';
 import * as JWT from 'jsonwebtoken';
 import * as fetch from 'node-fetch';
+import { Op } from "sequelize"
 const sha256 = require('sha256');
 const secret = require('../../config.json').jwtSecret;
 const { redirect_uri, client_id, client_secret } = require('../../config.json').Google;
@@ -24,16 +25,22 @@ export class AuthService {
         return { token: this.getToken(user) };
     }
     async localRegister(reg: regDTO): Promise<IToken> {
-        try {
-            var user = await this.userRep.create({
-                login: reg.login,
-                password: reg.password,
-                email: reg.email
-            });
-            return { token: this.getToken(user) };
-        } catch (e) {
-            throw new HttpException("not unique login/email!", HttpStatus.NOT_IMPLEMENTED);
-        }
+
+        if (await this.userRep.findOne({
+            where: {
+                [Op.or]: [{ login: reg.login }, { email: reg.email }]
+            }
+        })) throw new HttpException("not unique login/email!", HttpStatus.NOT_IMPLEMENTED);
+
+        var user = await this.userRep.create({
+            login: reg.login,
+            password: reg.password,
+            email: reg.email
+        });
+        return { token: this.getToken(user) };
+
+
+
     }
 
     private async isLoginExist(login: string) {
