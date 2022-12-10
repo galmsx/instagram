@@ -28,7 +28,7 @@
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
-    "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/platform-express": "^9.2.1",
     "@types/mz": "0.0.32",
     "base64url": "^3.0.1",
     "class-transformer": "^0.2.3",
