@@ -34,7 +34,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.9.1",
     "emailjs": "^2.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mysql2": "^1.6.5",
     "mz": "^2.7.0",
     "node-fetch": "^2.6.0",
