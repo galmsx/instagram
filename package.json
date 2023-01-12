@@ -32,7 +32,7 @@
     "@types/mz": "0.0.32",
     "base64url": "^3.0.1",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.9.1",
+    "class-validator": "^0.14.0",
     "emailjs": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.6.5",
